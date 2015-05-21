@@ -11,7 +11,9 @@ setup(
     url='http://git.unomena.net/unomena/unoconsole',
     packages = find_packages(),
     dependency_links = [],
-    install_requires = [],
+    install_requires = [
+        'humanize==0.5.1'
+    ],
     tests_require=[
         'django-setuptest>=0.1.2',
         'pysqlite>=2.5',
