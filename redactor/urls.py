@@ -3,7 +3,7 @@ Created on 18 May 2015
 
 @author: michaelwhelehan
 '''
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 from django.views.decorators.csrf import csrf_exempt
 
 from redactor import views
