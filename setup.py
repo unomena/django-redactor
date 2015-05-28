@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='redactor',
-    version='0.0.1',
+    version='0.0.2',
     description='Redactor implemented in Django',
     long_description = open('README.rst', 'r').read() + open('AUTHORS.rst', 'r').read(),
     author='Unomena',
