@@ -1,13 +1,20 @@
-if (!RedactorPlugins) var RedactorPlugins = {};
-
 (function($)
 {
-	RedactorPlugins.filemanager = function()
+	$.Redactor.prototype.filemanager = function()
 	{
 		return {
+			langs: {
+				en: {
+					"upload": "Upload",
+					"choose": "Choose"
+				}
+			},
 			init: function()
 			{
-				if (!this.opts.fileManagerJson) return;
+				if (!this.opts.fileManagerJson)
+				{
+					return;
+				}
 
 				this.modal.addCallback('file', this.filemanager.load);
 			},
@@ -16,8 +23,8 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 				var $modal = this.modal.getModal();
 
 				this.modal.createTabber($modal);
-				this.modal.addTab(1, 'Upload', 'active');
-				this.modal.addTab(2, 'Choose');
+				this.modal.addTab(1, this.lang.get('upload'), 'active');
+				this.modal.addTab(2, this.lang.get('choose'));
 
 				$('#redactor-modal-file-upload-box').addClass('redactor-tab redactor-tab1');
 
@@ -56,8 +63,11 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 				e.preventDefault();
 
 				var $target = $(e.target).closest('.redactor-file-manager-link');
+				var link = document.createElement('a');
+				link.href = $target.attr('rel');
+				link.innerHTML = $target.attr('title');
 
-				this.file.insert('<a href="' + $target.attr('rel') + '">' + $target.attr('title') + '</a>');
+				this.file.insert(link);
 			}
 		};
 	};
