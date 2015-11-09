@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Redactor</title>
+<meta charset="utf-8">
+    <link rel="stylesheet" href="static/redactor/css/redactor.css" />
+    <link rel="stylesheet" href="static/redactor/css/codemirror.css" />
+
+    <!-- Place jQuery & Redactor JS in header! -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+    <script src="static/redactor/js/redactor.js"></script>
+    <script src="static/redactor/js/codemirror.js"></script>
+    <script src="static/redactor/js/codemirror1.js"></script>
+    <script src="static/redactor/js/xml.js"></script>
+    <script src="static/redactor/js/counter.js"></script>
+    <script src="static/redactor/js/fullscreen.js"></script>
+    <script src="static/redactor/js/inlinestyle.js"></script>
+    <script src="static/redactor/js/limiter.js"></script>
+    <!-- Use Codemirror instead -->
+    <!--script src="static/redactor/js/source.js"></script-->
+    <!-- Bad idea -->
+    <!--script src="static/redactor/js/table.js"></script-->
+    <script src="static/redactor/js/textexpander.js"></script>
+    <script type="text/javascript">
+    $(function()
+    {
+        $('#redactor').redactor({
+            // Plugins - list them all here
+            plugins: [
+                'codemirror',
+                'counter',
+                'fullscreen',
+                'inlinestyle',
+                'limiter',
+                'textexpander', 
+            ],
+            // Codemirror - use this instead of the source view
+            codemirror: {
+                lineNumbers: true,
+                mode: 'xml',
+                indentUnit: 4
+            },
+            callbacks: {
+                // Counts the amount of words and chars and prints it tot he JS console
+                counter: function(data)
+                {
+                    console.log('Words: ' + data.words);
+                    console.log('Characters: ' + data.characters);
+                    console.log('Characters w/o spaces: ' + (data.characters - data.spaces));
+                }
+            },
+            textexpander: [
+                ['lorem ipsum', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'],
+                ['text', 'Text']
+            ],
+            replaceDivs: false,
+            removeWithoutAttr: false,
+            limiter: 500, // Limits the number of characters (depends on plugin)
+        });
+    });
+    </script>
+
+</head>
+<body style="padding-top:50px;">
+    
+    <textarea id="redactor">...</textarea>
+    
+    
+</body>
+</html>
