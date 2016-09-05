@@ -16,7 +16,10 @@ from redactor import http
 
 
 class RedactorImageUpload(generic_views.View):
-    upload_dir = 'redactor_images'
+    if settings.REDACTOR_IMAGE_UPLOAD_DIR:
+        upload_dir = settings.REDACTOR_IMAGE_UPLOAD_DIR
+    else:
+        upload_dir = 'redactor_images'
 
     def post(self, request, *args, **kwargs):
         the_file = http.upload_receive(request)
@@ -35,7 +38,10 @@ class RedactorImageUpload(generic_views.View):
 
 
 class RedactorImages(generic_views.View):
-    upload_dir = 'redactor_images'
+    if settings.REDACTOR_IMAGE_UPLOAD_DIR:
+        upload_dir = settings.REDACTOR_IMAGE_UPLOAD_DIR
+    else:
+        upload_dir = 'redactor_images'
 
     def get(self, request, *args, **kwargs):
         filepath = os.path.join(settings.MEDIA_ROOT, self.upload_dir)
@@ -57,11 +63,17 @@ class RedactorImages(generic_views.View):
 
 
 class RedactorFileUpload(RedactorImageUpload):
-    upload_dir = 'redactor_files'
+    if settings.REDACTOR_FILE_UPLOAD_DIR:
+        upload_dir = settings.REDACTOR_FILE_UPLOAD_DIR
+    else:
+        upload_dir = 'redactor_files'
 
 
 class RedactorFiles(generic_views.View):
-    upload_dir = 'redactor_files'
+    if settings.REDACTOR_FILE_UPLOAD_DIR:
+        upload_dir = settings.REDACTOR_FILE_UPLOAD_DIR
+    else:
+        upload_dir = 'redactor_files'
 
     def get(self, request, *args, **kwargs):
         filepath = os.path.join(settings.MEDIA_ROOT, self.upload_dir)
